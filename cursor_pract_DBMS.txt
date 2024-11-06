@@ -1,0 +1,62 @@
+------------------#####PRACTICAL CURSOR PROGRAM 1 #####...----------------------
+SQL> create table infom(rn int,name varchar(22),br varchar(11));
+
+
+
+SQL> create table infom1(rn int,name varchar(22),br varchar(11));
+
+Table created.
+
+SQL> insert into infom values(1,'aa','com');
+
+1 row created.
+
+SQL> insert into infom values(2,'bb','it');
+
+1 row created.
+
+SQL> insert into infom values(3,'cb','civil');
+
+1 row created.
+
+SQL> insert into infom1 values(3,'cb','civil');
+
+1 row created.
+
+SQL> insert into infom1 values(4,'db','al');
+
+1 row created.
+
+SQL> insert into infom1 values(5,'xz','etc');
+
+1 row created.
+
+SQL>  declare
+    rn infom.rn%type;
+    name infom.name%type;
+    br infom.br%type;
+    cursor c_infom is select * from infom minus select * from infom1;
+    begin
+    open c_infom;
+    loop
+    fetch c_infom into rn,name,br;
+   exit when c_infom%notfound;
+   insert into infom1 values(rn,name,br);
+      end loop;
+   close c_infom;
+   end;
+   /
+
+PL/SQL procedure successfully completed.
+
+SQL>  select * from info1;
+
+        RN NAME                   BR
+---------- ---------------------- -----------
+         3 cb                     civil
+         4 db                     al
+         5 xz                     etc
+         1 aa                     com
+         2 bb                     it
+
+SQL>
