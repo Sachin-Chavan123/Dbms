@@ -1,0 +1,200 @@
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.37 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databses;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'databses' at line 1
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| ac                 |
+| avcoe              |
+| emp                |
+| information_schema |
+| mysql              |
+| p1                 |
+| performance_schema |
+| pratik             |
+| r1                 |
+| stud               |
+| stude              |
+| student            |
+| sud                |
+| sys                |
++--------------------+
+14 rows in set (0.00 sec)
+
+mysql> use r1;
+Database changed
+
+mysql> create table r1(rollno  int ,name varchar(22),marks int);
+Query OK, 0 rows affected (0.03 sec)
+
+
+mysql> insert into r1 values(1,"aaa",55);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into r1 values(2,"bbb",66);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into r1 values(3,"ccc",77);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> create table r3 (rollno int, name varchar(33),marks int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> select * from r1;
++--------+------+-------+
+| rollno | name | marks |
++--------+------+-------+
+|      1 | aaa  |    55 |
+|      2 | bbb  |    66 |
+|      3 | ccc  |    77 |
++--------+------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select * from r3;
+Empty set (0.00 sec)
+
+mysql> insert into r3 values(1,"kkl",88);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into r3 values(4,"fff",99);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from r3;
++--------+------+-------+
+| rollno | name | marks |
++--------+------+-------+
+|      1 | kkl  |    88 |
+|      4 | fff  |    99 |
++--------+------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into r3 values(2,"ddd",45);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from r3;
++--------+------+-------+
+| rollno | name | marks |
++--------+------+-------+
+|      1 | kkl  |    88 |
+|      4 | fff  |    99 |
+|      2 | ddd  |    45 |
++--------+------+-------+
+3 rows in set (0.00 sec)
+
+
+mysql> select * from r1 union select * from r3;
++--------+------+-------+
+| rollno | name | marks |
++--------+------+-------+
+|      1 | aaa  |    55 |
+|      2 | bbb  |    66 |
+|      3 | ccc  |    77 |
+|      1 | kkl  |    88 |
+|      4 | fff  |    99 |
+|      2 | ddd  |    45 |
++--------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into r1 values(4,"fff",99);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from r1;
++--------+------+-------+
+| rollno | name | marks |
++--------+------+-------+
+|      1 | aaa  |    55 |
+|      2 | bbb  |    66 |
+|      3 | ccc  |    77 |
+|      4 | fff  |    99 |
++--------+------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from r1 union select * from r3;
++--------+------+-------+
+| rollno | name | marks |
++--------+------+-------+
+|      1 | aaa  |    55 |
+|      2 | bbb  |    66 |
+|      3 | ccc  |    77 |
+|      4 | fff  |    99 |
+|      1 | kkl  |    88 |
+|      2 | ddd  |    45 |
++--------+------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from r1 union all select * from r3;
++--------+------+-------+
+| rollno | name | marks |
++--------+------+-------+
+|      1 | aaa  |    55 |
+|      2 | bbb  |    66 |
+|      3 | ccc  |    77 |
+|      4 | fff  |    99 |
+|      1 | kkl  |    88 |
+|      4 | fff  |    99 |
+|      2 | ddd  |    45 |
++--------+------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from r1  intersect select * from r3;
++--------+------+-------+
+| rollno | name | marks |
++--------+------+-------+
+|      4 | fff  |    99 |
++--------+------+-------+
+1 row in set (0.00 sec)
+
+
+mysql> select min(marks) from r1;
++------------+
+| min(marks) |
++------------+
+|         55 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select max(marks) from r1;
++------------+
+| max(marks) |
++------------+
+|         99 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(marks) from r1;
++------------+
+| avg(marks) |
++------------+
+|    74.2500 |
++------------+
+1 row in set (0.01 sec)
+
+mysql> select count(*) from r1;
++----------+
+| count(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> select sum(marks) from r1;
++------------+
+| sum(marks) |
++------------+
+|        297 |
++------------+
+1 row in set (0.00 sec)
+

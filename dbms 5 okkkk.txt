@@ -1,0 +1,58 @@
+
+SQL> create or replace procedure book(r number)
+  2  as
+  3  c number;
+  4  BEGIN
+  5  select to_number(trunc(sysdate-doi)) into c from A where rollno=r ;
+  6  if c>=15 AND c<=30 then
+  7  c:=c-15;
+  8  insert into f values(r,sysdate,c*5);
+  9  update A set status='R' where rollno=r;
+ 10  elsif c>30 then
+ 11  c:=c-30;
+ 12  insert into f values(r,sysdate,c*50+75);
+ 13  update A set status='R' where rollno=r;
+ 14  end if;
+ 15  EXCEPTION
+ 16  WHEN no_data_found THEN
+ 17  dbms_output.put_line('No such Rollno !');
+ 18  end;
+ 19  /
+
+Procedure created.
+
+SQL> set serveroutput on;
+SQL> execute book(6);
+No such Rollno !
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from f;
+
+    ROLLNO DOI              AMT
+---------- --------- ----------
+         4 06-NOV-24      42475
+
+SQL> select * from A;
+
+    ROLLNO NAME                 DOI       NOB
+---------- -------------------- --------- --------------------
+STATUS
+--------------------
+         1 Samrat               23-MAY-22 CPP
+I
+
+         2 ANNJNX               23-MAY-22 PPL
+R
+
+         3 JKKK                 22-JUN-22 DBMS
+I
+
+
+    ROLLNO NAME                 DOI       NOB
+---------- -------------------- --------- --------------------
+STATUS
+--------------------
+         4 DRDDRTDD             12-JUN-22 DLLL
+R
+
