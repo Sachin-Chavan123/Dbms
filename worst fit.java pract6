@@ -1,0 +1,72 @@
+Program code for Worst Fit Memory management Scheme
+public class PrepInsta
+{
+static void WorstFit(int b_size[], int m, int p_size[], int n)
+{
+Int allocate[] = new int[n];
+// no block is assigned to a process initially
+for ( int I =0; i< allocate.length++)
+allocate[i] =-1;
+
+for (int i=0; i<n; i++)
+{
+// determine the first fit block for the current process
+Int wstIdx = -1;
+for (int j=0; j<m; j++) { if (b_Size[j] >= p_Size[i]) 
+{ 
+ if (wstIdx == -1) 
+wstIdx = j; 
+else if (b_Size[wstIdx] < b_Size[j]) 
+wstIdx = j;
+} 
+}
+
+
+// searching an empty memory block for the current process 
+ 
+if (wstIdx != -1) 
+{ 
+// assigning memory block j to the process p[i] 
+allocate[i] = wstIdx; 
+
+// Reduce available memory in this block. 
+b_Size[wstIdx] -= p_Size[i]; 
+} 
+} 
+ 
+ 
+System.out.println
+ 
+("\nProcess Number \tProcess Size\tBlock Number "); 
+for (int i = 0; i < n; i++) 
+{ 
+ System.out.print
+ 
+(" " + (i+1) + "\t\t" + processSize[i] + "\t\t"); 
+ 
+if (allocation[i] != -1) 
+System.out.print(allocation[i] + 1); 
+
+else
+ System.out.print("Not Allocated");
+
+
+ System.out.println(); 
+} 
+} 
+
+// Driver code 
+
+
+public static void main(String[] args) 
+{ 
+int b_Size[] = {100, 500, 200, 300, 600}; 
+int p_Size[] = {212, 417, 112, 426}; 
+int m = b_Size.length; 
+int n = p_Size.length; 
+
+worstFit(b_Size, m, p_Size, n); 
+} 
+} 
+
+
